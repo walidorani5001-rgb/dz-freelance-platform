@@ -1,0 +1,15 @@
+.buildlog/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+android/
+ios/
+macos/
+linux/
+windows/
+web/
+build/
+*.iml
+*.log
+local.properties
