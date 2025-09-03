@@ -52,12 +52,8 @@ jobs:
 
       - name: Create key.properties
         run: |
-          cat > android/key.properties <<EOF
-storePassword=${{ secrets.KEYSTORE_PASSWORD }}
-keyPassword=${{ secrets.KEYSTORE_PASSWORD }}
-keyAlias=dzfreelance
-storeFile=dzfreelance.keystore
-EOF
+          mkdir -p android
+          printf "storePassword=%s\nkeyPassword=%s\nkeyAlias=dzfreelance\nstoreFile=dzfreelance.keystore\n" "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
 
       - name: Build app bundle (AAB)
         run: flutter build appbundle --release
@@ -69,7 +65,7 @@ EOF
         uses: actions/upload-artifact@v4
         with:
           name: dz-freelance-release
-          path: 
+          path:
             - build/app/outputs/bundle/release/app-release.aab
             - build/app/outputs/flutter-apk/app-release.apk
             - android/app/dzfreelance.keystore
